@@ -227,6 +227,10 @@ function generateEndpoint(url: string) {
   if (url === "/") {
     return "/__nitro-index";
   }
+  // Resolve wildcard route at root
+  if (url === "/**") {
+    return "/__nitro";
+  }
   return url.includes("/**")
     ? "/__nitro-" +
         withoutLeadingSlash(url.replace(/\/\*\*.*/, "").replace(/[^a-z]/g, "-"))
